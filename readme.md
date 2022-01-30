@@ -22,6 +22,9 @@ source .venv/bin/activate
 uvicorn main:app --reload
 ```
 
+## usage
+
+just GET http://localhost:8000/https%3A%2F%2Fnginx.org
 
 ## warning
 DO NOT EXPOSE THIS TO THE INTERNET AS THERE IS NO AUTHENTICATION AND IT WILL BE ABUSED BY MALICIOUS ACTORS
