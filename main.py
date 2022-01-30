@@ -27,6 +27,9 @@ async def root(request: Request, url: str):
         return Response(status_code=500, content="IPV6_BLOCK not set")
 
     connector = aiohttp.TCPConnector(local_addr=(get_random_ipv6(), 0))
-    async with aiohttp.ClientSession(headers=headers, connector=connector) as session:
-        async with session.get(url) as response:
-            return Response(content=await response.read(), status_code=response.status)
+    try:
+        async with aiohttp.ClientSession(headers=headers, connector=connector) as session:
+            async with session.get(url) as response:
+                return Response(content=await response.read(), status_code=response.status)
+    except aiohttp.client_exceptions.InvalidURL:
+        return Response(status_code=404)
