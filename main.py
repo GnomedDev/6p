@@ -39,5 +39,8 @@ async def root(request: Request, url: str):
                 return Response(
                     content=await response.read(), status_code=response.status
                 )
-    except aiohttp.client_exceptions.InvalidURL:
+    except (
+        aiohttp.client_exceptions.InvalidURL,
+        aiohttp.client_exceptions.ClientConnectorError,
+    ):
         return Response(status_code=404)
