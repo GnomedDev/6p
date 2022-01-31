@@ -1,6 +1,7 @@
 import ipaddress
 import os
 import random
+import urllib
 
 import aiohttp
 from dotenv import load_dotenv
@@ -23,6 +24,9 @@ app = FastAPI()
 
 @app.get("/{url:path}")
 async def root(request: Request, url: str):
+
+    url = urllib.parse.unquote(url)
+
     headers = dict(request.headers)
     headers.pop("host", None)
     headers.pop("Host", None)
